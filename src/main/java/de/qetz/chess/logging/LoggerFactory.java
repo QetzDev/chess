@@ -1,4 +1,4 @@
-package logging;
+package de.qetz.chess.logging;
 
 import com.google.common.base.Preconditions;
 

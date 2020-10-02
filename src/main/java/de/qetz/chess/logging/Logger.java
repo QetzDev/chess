@@ -1,4 +1,4 @@
-package logging;
+package de.qetz.chess.logging;
 
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
