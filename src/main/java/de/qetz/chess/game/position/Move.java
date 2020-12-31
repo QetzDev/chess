@@ -2,27 +2,39 @@ package de.qetz.chess.game.position;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
-import de.qetz.chess.game.position.direction.Direction;
 
 import java.util.Objects;
 
+import de.qetz.chess.game.position.direction.Direction;
+
 public final class Move {
+  private final Position oldPosition;
+  private final Position newPosition;
   private final Direction direction;
-  private final Position position;
   private final int moves;
 
-  private Move(Direction direction, Position position, int moves) {
+  private Move(
+    Position oldPosition,
+    Position newPosition,
+    Direction direction,
+    int moves
+  ) {
+    this.oldPosition = oldPosition;
+    this.newPosition = newPosition;
     this.direction = direction;
-    this.position = position;
     this.moves = moves;
+  }
+
+  public Position oldPosition() {
+    return oldPosition;
+  }
+
+  public Position newPosition() {
+    return newPosition;
   }
 
   public Direction direction() {
     return direction;
-  }
-
-  public Position position() {
-    return position;
   }
 
   public int moves() {
@@ -38,7 +50,7 @@ public final class Move {
 
   @Override
   public int hashCode() {
-    return Objects.hash(direction, position, moves);
+    return Objects.hash(oldPosition, newPosition, direction, moves);
   }
 
   @Override
@@ -46,19 +58,22 @@ public final class Move {
     if (object == this) {
       return true;
     }
-    if (!(object instanceof Move move)) {
+    if (!(object instanceof Move)) {
       return false;
     }
-    return direction == move.direction
-      && position.equals(move.position)
+    Move move = (Move) object;
+    return oldPosition.equals(move.oldPosition)
+      && newPosition.equals(move.newPosition)
+      &&  direction == move.direction
       && moves == move.moves;
   }
 
   @Override
   public Move clone() {
     return newBuilder()
+      .withOldPosition(oldPosition.clone())
+      .withNewPosition(newPosition.clone())
       .withDirection(direction)
-      .withPosition(position.clone())
       .withMoves(moves)
       .createMove();
   }
@@ -68,19 +83,25 @@ public final class Move {
   }
 
   public static final class Builder {
+    private Position oldPosition;
+    private Position newPosition;
     private Direction direction;
-    private Position position;
     private int moves;
 
     private Builder() {}
 
-    public Builder withDirection(Direction direction) {
-      this.direction = direction;
+    public Builder withOldPosition(Position oldPosition) {
+      this.oldPosition = oldPosition;
       return this;
     }
 
-    public Builder withPosition(Position position) {
-      this.position = position;
+    public Builder withNewPosition(Position newPosition) {
+      this.newPosition = newPosition;
+      return this;
+    }
+
+    public Builder withDirection(Direction direction) {
+      this.direction = direction;
       return this;
     }
 
@@ -90,9 +111,10 @@ public final class Move {
     }
 
     public Move createMove() {
+      Preconditions.checkNotNull(oldPosition);
+      Preconditions.checkNotNull(newPosition);
       Preconditions.checkNotNull(direction);
-      Preconditions.checkNotNull(position);
-      return new Move(direction, position, moves);
+      return new Move(oldPosition, newPosition, direction, moves);
     }
   }
 }

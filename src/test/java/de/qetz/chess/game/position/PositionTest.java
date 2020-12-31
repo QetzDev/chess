@@ -1,9 +1,10 @@
 package de.qetz.chess.game.position;
 
-import de.qetz.chess.game.position.direction.Direction;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.logging.Logger;
+
+import de.qetz.chess.game.position.direction.Direction;
 
 // Have to use a main-method and not the normal test environment
 // because IntelliJ, Gradle & Junit combined doesn't work with Java 14

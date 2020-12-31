@@ -1,7 +1,7 @@
 package de.qetz.chess.logging;
 
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
+import java.io.PrintStream;
 import java.util.Date;
 
 public final class Logger {
@@ -38,7 +38,6 @@ public final class Logger {
     this.printLevel = printLevel;
     this.logFormat = logFormat;
   }
-
 
   public void debug(String message, Object... substitutes) {
     var replacedMessage = String.format(message, substitutes);

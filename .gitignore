@@ -2,7 +2,6 @@
 *.jar
 *.iml
 .idea
-gradle
 build
 .gradle
 TODO.txt

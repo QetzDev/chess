@@ -20,13 +20,16 @@ public final class PositionNotReachable extends Exception {
 
   private static final String ERROR_MESSAGE
     = "Field to move is out of grid! " +
-    "Column: %s, Row: %s, Moves: %s, Direction: %s";
+    "OldPosition(Column: %s, Row: %s), NewPosition(Column: %s, Row: %s), " +
+    "Moves: %s, Direction: %s";
 
   @Override
   public String getMessage() {
     return String.format(ERROR_MESSAGE,
-      move.position().column(),
-      move.position().row(),
+      move.oldPosition().column(),
+      move.oldPosition().row(),
+      move.newPosition().column(),
+      move.newPosition().row(),
       move.moves(),
       move.direction().name());
   }
