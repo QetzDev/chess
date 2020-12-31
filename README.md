@@ -4,4 +4,4 @@ As you might already read in the repository description, this is a java based ch
 
 **Note**: This project is still in wok in progress.
 
-*Project made by Qetz to learn and as a farewell present for my mentor. (Hopefully he doesn't read it too early. If you do so, please stay quite.)*
+*Project made by Qetz to learn*
